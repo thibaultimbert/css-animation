@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Curved Slice over Conic Gradient</title>
+<style>
+  :root {
+    /* rotate the whole thing if you want */
+    --border-angle: 0deg;
+    /* size of the demo circle */
+    --size: 220px;
+  }
+
+  body { 
+    display: grid; place-items: center; min-height: 100svh; 
+    margin: 0; background: #0b0d12; color: #e6e6e6; font-family: system-ui, sans-serif;
+  }
+
+  .ring {
+    position: relative;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    /* your base conic background */
+    background:
+      conic-gradient(
+        from var(--border-angle) at 0% 0%,
+        #9f644e 0% 90%,
+        #9f644e 95% 100%    /* we’ll overlay the slice between 90–95% with SVG */
+      );
+    transform: rotate(var(--border-angle));
+  }
+
+  /* SVG overlay (the curved slice) */
+  .slice {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    pointer-events: none; /* purely visual */
+  }
+</style>
+</head>
+<body>
+
+<div class="ring">
+  <!-- SOLID curved slice (blue) -->
+  <svg class="slice" viewBox="0 0 100 100" aria-hidden="true">
+    <!--
+      Path explanation:
+      - We draw an outer circular arc (A 40 40 ...) between two points on the circle
+      - Then return to the start with a quadratic curve (Q ...) to create a CURVED inner edge
+      - This makes one side curved (not a straight line to center)
+    -->
+    <path
+      d="M 88 20
+         A 40 40 0 0 1 96 50
+         A 40 40 0 0 1 88 80
+         Q 62 50 88 20 Z"
+      fill="#48c8ff"
+      opacity="0.9"/>
+  </svg>
+
+  <!-- OPTIONAL: FADED curved slice (white → transparent). 
+       Uncomment this block and comment the solid one above if you want the fade. -->
+  <!--
+  <svg class="slice" viewBox="0 0 100 100" aria-hidden="true">
+    <defs>
+      <linearGradient id="fadeWhite" x1="60" y1="50" x2="96" y2="50" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stop-color="white" stop-opacity="0"/>
+        <stop offset="100%" stop-color="white" stop-opacity="1"/>
+      </linearGradient>
+    </defs>
+    <path
+      d="M 88 20
+         A 40 40 0 0 1 96 50
+         A 40 40 0 0 1 88 80
+         Q 62 50 88 20 Z"
+      fill="url(#fadeWhite)"/>
+  </svg>
+  -->
+</div>
+
+</body>
+</html>

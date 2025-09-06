@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Chat – ChatGPT-like Experience</title>
+    <meta name="color-scheme" content="light dark" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <noscript>
+      This app requires JavaScript to function. Please enable JavaScript in your browser.
+    </noscript>
+
+    <div id="app" class="app">
+      <header class="header" role="banner">
+        <div class="brand" aria-label="App">
+          <div class="logo" aria-hidden="true">💬</div>
+          <div class="titles">
+            <h1 class="title">Chat</h1>
+            <p class="subtitle">ChatGPT-like demo</p>
+          </div>
+        </div>
+        <div class="header-actions">
+          <button id="themeToggle" class="icon-button" aria-label="Toggle theme" title="Toggle theme">
+            <span class="sun" aria-hidden="true">☀️</span>
+            <span class="moon" aria-hidden="true">🌙</span>
+          </button>
+        </div>
+      </header>
+
+      <main class="chat" role="main">
+        <div id="messages" class="messages" role="log" aria-live="polite" aria-relevant="additions"></div>
+      </main>
+
+      <footer class="composer" role="contentinfo">
+        <form id="composerForm" class="composer-form" autocomplete="off">
+          <div class="input-wrap">
+            <textarea id="messageInput" class="input" rows="1" placeholder="Message…" aria-label="Type your message" spellcheck="true"></textarea>
+            <div id="typing" class="typing hidden" aria-hidden="true">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+          </div>
+          <button id="sendButton" class="send" type="submit" aria-label="Send message">Send</button>
+        </form>
+        <p class="hint">Press Enter to send, Shift+Enter for a new line.</p>
+      </footer>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+  </html>
+
+
